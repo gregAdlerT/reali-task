@@ -4,6 +4,7 @@ import java.util.stream.Collectors
 
 import com.model.Listing
 import com.repository.ListingsRepository
+import javax.transaction.Transactional
 import org.geojson.{Feature, FeatureCollection, GeoJsonObject, Point}
 import org.springframework.stereotype.Service
 
@@ -16,9 +17,10 @@ class MyService(repository: ListingsRepository) {
   
   def getListingsGeoJSON( priceMax: Long, priceMin: Long, bedroomsMin: Int, bedroomsMax: Int,
                           bathroomsMin: Int, bathroomsMax: Int): GeoJsonObject = {
-    val listings = getFlats(priceMax, priceMin, bedroomsMin, bedroomsMax, bathroomsMin, bathroomsMax)
-
+    val listings = getListings(priceMax, priceMin, bedroomsMin, bedroomsMax, bathroomsMin, bathroomsMax)
+  
     val featuresList: java.util.List[Feature] = listings
+        .stream()
       .map(listingToFeature)
       .collect(Collectors.toList())
     
@@ -28,8 +30,8 @@ class MyService(repository: ListingsRepository) {
     features
   }
 
-  def getFlats( priceMax: Long, priceMin: Long, bedroomsMin: Int, bedroomsMax: Int,
-               bathroomsMin: Int, bathroomsMax: Int): java.util.stream.Stream[Listing]= repository.findByPriceBetweenAndBedroomsBetweenAndBathroomsBetween(priceMin, priceMax, bedroomsMin,
+  def getListings(priceMax: Long, priceMin: Long, bedroomsMin: Int, bedroomsMax: Int,
+                  bathroomsMin: Int, bathroomsMax: Int): java.util.List[Listing]= repository.findByPriceBetweenAndBedroomsBetweenAndBathroomsBetween(priceMin, priceMax, bedroomsMin,
       bedroomsMax, bathroomsMin, bathroomsMax)
 
 

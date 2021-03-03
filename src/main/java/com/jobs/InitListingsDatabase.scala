@@ -5,6 +5,7 @@ import com.repository.ListingsRepository
 import javax.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
+import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
 import scala.io.Source
@@ -12,6 +13,7 @@ import scala.io.Source
 /**
  * @author Greg Adler
  */
+@Component
 class InitListingsDatabase(@Value("${file.url}")
                            val fileUrl: String, flatRepository: ListingsRepository) extends CommandLineRunner{
   

@@ -11,4 +11,6 @@ public interface ApiConstants {
     String MAX_BED="100";
     String MIN_BATH="0";
     String MAX_BATH="100";
+    String PAGE="0";
+    String PAGE_SIZE="50";
 }

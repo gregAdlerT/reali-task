@@ -12,8 +12,8 @@ class TaskController(val myService: ListingServiceImpl) {
 
   @GetMapping(value = Array(ApiConstants.LISTINGS))
   def getListings(
-                   @RequestParam(value = "page", defaultValue = "0") page: Int,
-                   @RequestParam(value = "page_size", defaultValue = "100") pageSize: Int,
+                   @RequestParam(value = "page", defaultValue = ApiConstants.PAGE) page: Int,
+                   @RequestParam(value = "page_size", defaultValue = ApiConstants.PAGE_SIZE) pageSize: Int,
                    @RequestParam(value = "min_price", defaultValue = ApiConstants.MIN_PRICE) priceMin: Long,
                    @RequestParam(value = "max_price", defaultValue = ApiConstants.MAX_PRICE) priceMax: Long,
                    @RequestParam(value = "min_bed", defaultValue = ApiConstants.MIN_BED) bedroomsMin: Int,

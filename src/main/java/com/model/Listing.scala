@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence._
 
 @Entity
-@Table(name = "Flats")
+@Table(name = "listings")
 case class Listing(idC: Long,
                    streetC: String,
                    statusC: String,

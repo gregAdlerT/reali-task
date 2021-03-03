@@ -2,11 +2,9 @@ package com.jobs
 
 import com.model.Listing
 import com.repository.ListingsRepository
-import javax.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
-import org.springframework.transaction.annotation.Transactional
 
 import scala.io.Source
 
@@ -39,7 +37,7 @@ class InitListingsDatabase(@Value("${file.url}")
     }
     res.map {
       case Right(x) => flatRepository.save(x)
-      case Left(x) => println(x) //todo: logger
+      case Left(x) => println(x)
     }
   }
 }

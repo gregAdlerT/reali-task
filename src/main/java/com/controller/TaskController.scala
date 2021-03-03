@@ -1,26 +1,23 @@
 package com.controller
 
-import com.model.Listing
-import com.service.MyService
+
+import com.api.ApiConstants
+import com.service.ListingServiceImpl
 import org.geojson.GeoJsonObject
 import org.springframework.web.bind.annotation.{GetMapping, RequestParam, RestController}
 
+
 @RestController
-class TaskController(val myService: MyService) {
+class TaskController(val myService: ListingServiceImpl) {
 
-
-  @GetMapping(value = Array("/listings"))
+  @GetMapping(value = Array(ApiConstants.LISTINGS))
   def getListings(
-               @RequestParam(value = "max_price", defaultValue = "999999") priceMax: Long,
-               @RequestParam(value = "min_price", defaultValue = "0") priceMin: Long,
-               @RequestParam(value = "min_bed", defaultValue = "0") bedroomsMin: Int,
-               @RequestParam(value = "max_bed", defaultValue = "1000") bedroomsMax: Int,
-               @RequestParam(value = "min_bath", defaultValue = "0") bathroomMin: Int,
-               @RequestParam(value = "max_bath", defaultValue = "1000") bathroomMax: Int,
-              ): GeoJsonObject= {
-    myService getListingsGeoJSON (priceMax, priceMin, bedroomsMin, bedroomsMax, bathroomMin, bathroomMax)
-  }
-
-
-
+                   @RequestParam(value = "min_price", defaultValue = ApiConstants.MIN_PRICE) priceMin: Long,
+                   @RequestParam(value = "max_price", defaultValue = ApiConstants.MAX_PRICE) priceMax: Long,
+                   @RequestParam(value = "min_bed", defaultValue = ApiConstants.MIN_BED) bedroomsMin: Int,
+                   @RequestParam(value = "max_bed", defaultValue = ApiConstants.MAX_BED) bedroomsMax: Int,
+                   @RequestParam(value = "min_bath", defaultValue = ApiConstants.MIN_BATH) bathroomMin: Int,
+                   @RequestParam(value = "max_bath", defaultValue = ApiConstants.MAX_BATH) bathroomMax: Int,
+                 ): GeoJsonObject =
+    myService.getListingsGeoJSON(priceMin, priceMax, bedroomsMin, bedroomsMax, bathroomMin, bathroomMax)
 }

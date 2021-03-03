@@ -5,6 +5,7 @@ import com.repository.ListingsRepository
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
+import org.apache.logging.log4j.scala.Logging
 
 import scala.io.Source
 
@@ -13,7 +14,7 @@ import scala.io.Source
  */
 @Component
 class InitListingsDatabase(@Value("${file.url}")
-                           val fileUrl: String, flatRepository: ListingsRepository) extends CommandLineRunner{
+                           val fileUrl: String, flatRepository: ListingsRepository) extends CommandLineRunner with Logging {
   
   override def run(args: String*): Unit = {
     downloadData()
@@ -37,7 +38,7 @@ class InitListingsDatabase(@Value("${file.url}")
     }
     res.map {
       case Right(x) => flatRepository.save(x)
-      case Left(x) => println(x)
+      case Left(x) =>logger.warn(s"Unable to parse listing $x")
     }
   }
 }

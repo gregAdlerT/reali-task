@@ -65,14 +65,9 @@
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-scala</artifactId>
-            <version>11.0</version>
+            <artifactId>log4j-api-scala_2.13</artifactId>
+            <version>12.0</version>
         </dependency>
-
-
-
-
-
 
     </dependencies>
 
@@ -106,7 +101,6 @@
                     </execution>
                 </executions>
             </plugin>
-
 
         </plugins>
     </build>

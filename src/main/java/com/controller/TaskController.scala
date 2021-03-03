@@ -12,6 +12,8 @@ class TaskController(val myService: ListingServiceImpl) {
 
   @GetMapping(value = Array(ApiConstants.LISTINGS))
   def getListings(
+                   @RequestParam(value = "page", defaultValue = "0") page: Int,
+                   @RequestParam(value = "page_size", defaultValue = "100") pageSize: Int,
                    @RequestParam(value = "min_price", defaultValue = ApiConstants.MIN_PRICE) priceMin: Long,
                    @RequestParam(value = "max_price", defaultValue = ApiConstants.MAX_PRICE) priceMax: Long,
                    @RequestParam(value = "min_bed", defaultValue = ApiConstants.MIN_BED) bedroomsMin: Int,
@@ -19,5 +21,5 @@ class TaskController(val myService: ListingServiceImpl) {
                    @RequestParam(value = "min_bath", defaultValue = ApiConstants.MIN_BATH) bathroomMin: Int,
                    @RequestParam(value = "max_bath", defaultValue = ApiConstants.MAX_BATH) bathroomMax: Int,
                  ): GeoJsonObject =
-    myService.getListingsGeoJSON(priceMin, priceMax, bedroomsMin, bedroomsMax, bathroomMin, bathroomMax)
+    myService.getListingsGeoJSON(page,pageSize, priceMin, priceMax, bedroomsMin, bedroomsMax, bathroomMin, bathroomMax)
 }

@@ -36,16 +36,6 @@ case class Listing(idC: Long,
   var lat: Double = latC
   @JsonProperty
   var lng: Double = lngC
-
-
-
+  
   def this() = this(0, null, null, 0, 0, 0, 0, 0, 0)
 }
-
-
-
-
-
-
-
-

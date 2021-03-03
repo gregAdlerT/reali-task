@@ -3,39 +3,31 @@ package com.model
 import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence._
 
+import scala.beans.BeanProperty
+
 @Entity
 @Table(name = "listings")
-case class Listing(idC: Long,
-                   streetC: String,
-                   statusC: String,
-                   priceC: Long,
-                   bedroomsC: Int,
-                   bathroomsC: Int,
-                   sq_ftC: Int,
-                   latC: Double,
-                   lngC: Double) {
+case class Listing(@BeanProperty
+                   idC: Long,
+                   @BeanProperty
+                   street: String,
+                   @BeanProperty
+                   status: String,
+                   @BeanProperty
+                   price: Long,
+                   @BeanProperty
+                   bedrooms: Int,
+                   @BeanProperty
+                   bathrooms: Int,
+                   @BeanProperty
+                   sq_ft: Int,
+                   @BeanProperty
+                   lat: Double,
+                   @BeanProperty
+                   lng: Double) {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @JsonProperty
+  @BeanProperty
   var id: Long = idC
-
-  @JsonProperty
-  var street: String = streetC
-  @JsonProperty
-  var status: String = statusC
-  @JsonProperty
-  var price: Long = priceC
-  @JsonProperty
-  var bedrooms: Int = bedroomsC
-  @JsonProperty
-  var bathrooms: Int = bathroomsC
-  @JsonProperty
-  var sq_ft: Int = sq_ftC
-  @JsonProperty
-  var lat: Double = latC
-  @JsonProperty
-  var lng: Double = lngC
-  
-  def this() = this(0, null, null, 0, 0, 0, 0, 0, 0)
+  def this() = this(0,null, null, 0, 0, 0, 0, 0, 0)
 }

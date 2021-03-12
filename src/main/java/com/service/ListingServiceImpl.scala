@@ -2,16 +2,20 @@ package com.service
 
 import java.util.stream.Collectors
 
-import com.repository.ListingsRepository
+import com.model.Listing
+import com.repository.ListingRepository
 import com.utils.ListingMapper
 import org.geojson.{Feature, FeatureCollection, GeoJsonObject}
-import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.{Page, PageRequest}
 import org.springframework.stereotype.Service
-
+/**
+ * @author Greg Adler
+ */
 @Service
-class ListingServiceImpl(repository: ListingsRepository) extends ListingService {
+class ListingServiceImpl(repository: ListingRepository) extends ListingService {
 
-  override def getListingsGeoJSON(page:Int,pageSize:Int,
+  override def getListingsGeoJSON(page:Int,
+                                  pageSize:Int,
                                   priceMin: Long,
                                   priceMax: Long,
                                   bedroomsMin: Int,
@@ -19,13 +23,15 @@ class ListingServiceImpl(repository: ListingsRepository) extends ListingService 
                                   bathroomsMin: Int,
                                   bathroomsMax: Int): GeoJsonObject = {
     val pageable = PageRequest.of(page, pageSize)
-    val listings = repository.findByPriceBetweenAndBedroomsBetweenAndBathroomsBetween(priceMin,
+    val listings:Page[Listing] = repository.findByPriceBetweenAndBedroomsBetweenAndBathroomsBetween(priceMin,
       priceMax,
       bedroomsMin,
       bedroomsMax,
       bathroomsMin,
       bathroomsMax,
       pageable)
+    
+  
 
     val featuresList: java.util.List[Feature] = listings
       .stream()
